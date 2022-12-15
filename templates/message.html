@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script  type="text/javascript" src="{{ url_for('static', filename = 'message.js') }}"> </script>
+
+<script>
+
+    let messages = {{message|tojson}}
+    
+</script>
+
+
+<div class="main-content">
+    <div id="all_message">
+    </div>
+</div>
+
+
+
+
+{% endblock %}

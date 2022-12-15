@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<script  type="text/javascript" src="{{ url_for('static', filename = 'evaluation_page.js') }}"> </script>
+    
+<script>
+
+    let data = {{data|tojson}}
+    
+</script>
+
+<div class="main-content">
+    <br/>
+    <div id="search_res"></div>
+</div>
+
+
+{% endblock %}
