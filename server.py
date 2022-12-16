@@ -10,10 +10,14 @@ database_user_password = 'Rivendell'
 default_scheme = '6156_Project'
 
 # Microservices URL
-slave1_url = 'http://127.0.0.1:5001'
-slave2_url = 'http://127.0.0.1:5002'
-slave3_url = 'http://127.0.0.1:5003'
-# slave4_url = 'http://127.0.0.1:5004'
+# slave1_url = 'http://127.0.0.1:5001'
+# slave2_url = 'http://127.0.0.1:5002'
+# slave3_url = 'http://127.0.0.1:5003'
+# # slave4_url = 'http://127.0.0.1:5004'
+
+slave1_url = 'http://18.218.200.249:5000'
+slave2_url = 'http://54.174.170.119:5000'
+slave3_url = 'http://3.140.241.0:5000'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Rivendell'
@@ -39,10 +43,32 @@ google = oauth.remote_app('google',
 MY_EMAIL = 'xh2510@columbia.edu'
 # Routes and functions
 
-# Homepage
 @app.route('/')
 def welcome_page():
-    return render_template('welcome.html')
+    access_token = session.get('access_token')
+    if access_token is None:
+        return redirect(url_for('login'))
+    return render_template('welcome.html', data=session.get('resp_obj'))
+
+my_email = ''
+master_url = 'http://127.0.0.1:5000'
+
+@app.route('/login')
+def login():
+    callback=url_for('authorized', _external=True)
+    return google.authorize(callback=callback)
+
+@app.route(REDIRECT_URI)
+@google.authorized_handler
+def authorized(resp):
+    access_token = resp['access_token']
+    session['access_token'] = access_token, ''
+    session['resp_obj'] = resp
+    return redirect(url_for('welcome_page'))
+
+@google.tokengetter
+def get_access_token():
+    return session.get('access_token')
 
 # Send email to slave 2
 my_email = ''
@@ -122,7 +148,10 @@ def rating():
 @app.route('/evaluation_page/<search_key>')
 def evaluation_page(search_key):
     result = requests.get(f'{slave2_url}/rating/{search_key}')
-    return render_template('evaluation_page.html', data = result.json())
+    query = search_key.split('&')
+    course_number = query[0]
+    message = requests.get(f'{slave3_url}/message/{course_number}')
+    return render_template('evaluation_page.html', data = result.json(), message=message.json())
 
 @app.route('/rating_page/<search_key>')
 def rating_page(search_key):
@@ -153,4 +182,4 @@ def about_page():
     return render_template('about.html', data=session.get('resp_obj'))
 
 if __name__ == '__main__':
-    app.run(debug = True, host='0.0.0.0', port=8080)
+    app.run(debug = True, host='0.0.0.0', port=5000)

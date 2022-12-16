@@ -5,7 +5,10 @@ function redirect_rating(id, instructor, name) {
 $(document).ready(function () {
     $("#user_email_nav").html(sessionStorage.getItem('user_email'));
     const search_res  = document.getElementById('search_res');
-    
+    const message_res = $("<div></div>");
+
+    console.log(message);
+
     $('#search_res').append(
         `
         <div>
@@ -14,43 +17,9 @@ $(document).ready(function () {
         `
     )
 
-    // const form  = document.getElementById('search_form');
-    // form.addEventListener('submit', (event) => {
-    //     event.preventDefault();
-    //     var keyword = form.elements['search_keyword'].value
-    //
-    //     console.log(keyword)
-    //
-    //     window.location.href = `../evaluation_page/` + keyword
-    //     // $.ajax({
-    //     //     type: "POST",
-    //     //     url: "../search",
-    //     //     contentType: "application/json; charset=utf-8",
-    //     //     data: JSON.stringify(keyword),
-    //     //     success: function () {
-    //     //         console.log("submitted")
-    //     //         window.location.href = `../search_page/` + keyword
-    //     //     },
-    //     //     error: function(jq,status,message) {
-    //     //         alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
-    //     //     }
-    //     // });
-    // });
-
-
-    // $('#search_res').append(
-    //     `
-    //     <div>
-    //     ${data} result
-    //     </div>
-    //     `
-    // )
-    // $.each(data, function(index, value) {
-    //     let new_row = display_log(value);
-    //     $("#log_list").append(new_row);
-    // });
-
     display_search_res();
+
+    display_message_res(message);
 })
 
 function show_star(grade){
@@ -166,4 +135,38 @@ function display_search_res() {
         console.log("eval btn clicked")
         redirect_rating($(this).attr("id"), $(this).attr("instructor"), $(this).attr("course_name"));
     });
+}
+
+function display_message_res(message) {
+    var message_block = $("<div class='message_block'></div>");
+
+    $.each(message, function(index, value) {
+        let new_row = display_each_message(value);
+        message_block.append(new_row);
+        console.log(new_row);
+    });
+
+    $("#message_res").append(message_block);
+}
+
+function display_each_message(comment) {
+    var comment_line = $("<div></div>");
+    comment_line.addClass("row row_search_res pt-2 ml-2");
+
+    var content = $("<div></div>");
+    content.addClass("col div_content");
+    content.html(comment.Content);
+    comment_line.append(content);
+
+    var time = $("<div></div>");
+    time.addClass("col-md-3 div_time");
+    time.html(comment.Time);
+    comment_line.append(time);
+
+    var email = $("<div></div>");
+    email.addClass("col-md-3 div_email");
+    email.html(comment.Email);
+    comment_line.append(email);
+
+    return comment_line
 }

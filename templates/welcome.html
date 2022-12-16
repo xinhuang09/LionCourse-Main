@@ -2,7 +2,11 @@
 
 {% block content %}
 
+<script>
 
+    let data = {{data|tojson}}
+    
+</script>
 
 <script  type="text/javascript" src="{{ url_for('static', filename = 'welcome.js') }}"> </script>
 <div class="log-in">

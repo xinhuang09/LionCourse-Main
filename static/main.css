@@ -276,3 +276,13 @@ label.star:before {
 .evaluation_instructor {
     font-size: 40px;
 }
+.message_block {
+    width: 100%;
+    display: table;
+    margin-top: 20px;
+    background-color: rgb(141, 139, 139,0.5);
+    border-radius: 10px;
+    padding: 1%;
+    margin-top: 5%;
+    padding-bottom: 5%;
+}
