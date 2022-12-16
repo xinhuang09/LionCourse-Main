@@ -44,6 +44,21 @@ MY_EMAIL = 'xh2510@columbia.edu'
 def welcome_page():
     return render_template('welcome.html')
 
+# Send email to slave 2
+my_email = ''
+
+@app.route('/sendEmail/<email>', methods=['GET'])
+def send_email(email):
+    global my_email
+    my_email = email
+    print("here" + my_email)
+    return my_email
+
+@app.route('/getEmail', methods=['GET'])
+def get_email():
+    print("here 1" + my_email)
+    return my_email
+
 # Main Functions and Features 
 
 # redirect to search page without search key

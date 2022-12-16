@@ -29,7 +29,20 @@ $(document).ready(function () {
                 alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
             }
         });
+    });
 
+    $.ajax({
+        type: "GET",
+        url: "../sendEmail/" + info.email,
+        contentType: "application/json; charset=utf-8",
+        // data: JSON.stringify(keyword),
+        success: function () {
+            // console.log("submitted")
+            // window.location.href = `../search_page/` + keyword
+        },
+        error: function(jq,status,message) {
+            alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
+        }
     });
 })
 
