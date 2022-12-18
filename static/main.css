@@ -267,3 +267,12 @@ label.star:before {
 /*		width: 83.33%;*/
 /*	}*/
 /*}*/
+.evaluation_name {
+    font-size: 40px;
+}
+.evaluation_number {
+    font-size: 40px;
+}
+.evaluation_instructor {
+    font-size: 40px;
+}

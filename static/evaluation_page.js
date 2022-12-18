@@ -79,24 +79,24 @@ function display_search_res() {
     $("#search_res").empty();
 
     $.each(data, function(index, value) {
-        var course_name = $("<h1></h1>");
+        var course_name = $("<div></div>");
         course_name.addClass("row pt-2");
-        var name = $("<h1></h1>");
-        name.addClass("col");
+        var name = $("<div></div>");
+        name.addClass("col evaluation_name");
         name.html(value.Course);
         course_name.append(name);
         $("#search_res").append(course_name);
 
-        var number_and_instructor = $("<h2></h2>");
-        number_and_instructor.addClass("row pt-2");
+        var number_and_instructor = $("<div></div>");
+        number_and_instructor.addClass("row pt-2 pb-4");
 
-        var number = $("<h2></h2>");
-        number.addClass("col-md-3");
+        var number = $("<div></div>");
+        number.addClass("col-md-5 evaluation_number");
         number.html(value.Number);
         number_and_instructor.append(number);
 
-        var instructor = $("<h2></h2>");
-        instructor.addClass("col-md-4");
+        var instructor = $("<div></div>");
+        instructor.addClass("col-md-7 evaluation_instructor");
         instructor.html(value.Instructor);
         number_and_instructor.append(instructor);
         $("#search_res").append(number_and_instructor);
