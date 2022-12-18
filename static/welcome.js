@@ -1,13 +1,13 @@
 
 $(document).ready(function () {
 
-    // // https://developers.google.com/identity/openid-connect/openid-connect#obtainuserinfo
-    // let info = parseJwt(data.id_token)
-    // console.log(data)
-    // console.log(info)
-    // $("#user_email").html("Hi! " + info.email);
-    // sessionStorage.setItem('user_email', info.email)
-    // $("#user_email_nav").html(sessionStorage.getItem('user_email'));
+    // https://developers.google.com/identity/openid-connect/openid-connect#obtainuserinfo
+    let info = parseJwt(data.id_token)
+    console.log(data)
+    console.log(info)
+    $("#user_email").html("Hi! " + info.email);
+    sessionStorage.setItem('user_email', info.email)
+    $("#user_email_nav").html(sessionStorage.getItem('user_email'));
 
     const form  = document.getElementById('search_form_welcome');
     form.addEventListener('submit', (event) => {
@@ -29,20 +29,7 @@ $(document).ready(function () {
                 alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
             }
         });
-    });
 
-    $.ajax({
-        type: "GET",
-        url: "../sendEmail/" + info.email,
-        contentType: "application/json; charset=utf-8",
-        // data: JSON.stringify(keyword),
-        success: function () {
-            // console.log("submitted")
-            // window.location.href = `../search_page/` + keyword
-        },
-        error: function(jq,status,message) {
-            alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
-        }
     });
 })
 
