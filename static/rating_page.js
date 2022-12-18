@@ -73,22 +73,22 @@ function rating() {
         "evaluation": evaluation
     }
 
-    // $.ajax({
-    //         type: "POST",
-    //         url: "../rating",
-    //         contentType: "application/json; charset=utf-8",
-    //         data: JSON.stringify(json_arg),
-    //         // complete: function () {
-    //         //     window.location.href = '../evaluation_page/' + search_key;
-    //         // },
-    //         success: function () {
-    //                     // location.reload();
-    //                     location.href = '../evaluation_page/' + search_key;
-    //                 },
-    //         error: function(jq,status,message) {
-    //             alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
-    //         }
-    //     });
+    $.ajax({
+            type: "POST",
+            url: "../rating",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(json_arg),
+            // complete: function () {
+            //     window.location.href = '../evaluation_page/' + search_key;
+            // },
+            // success: function () {
+            //             // location.reload();
+            //             location.href = '../evaluation_page/' + search_key;
+            //         },
+            // error: function(jq,status,message) {
+            //     alert('A jQuery error has occurred. Status: ' + status + ' - Message: ' + message);
+            // }
+        });
 
     window.location.href = '../evaluation_page/' + search_key;
 
