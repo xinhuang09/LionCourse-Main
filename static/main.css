@@ -71,6 +71,15 @@ body {
     padding-bottom: 5%;
 }
 
+#all_message{
+    margin-top: 50px;
+    width: 100%;
+    background-color: rgb(141, 139, 139, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    /* margin: auto; */
+}
+
 .nav-link{
     color:rgb(141, 139, 139);
     font-size: 20px;
@@ -287,3 +296,37 @@ label.star:before {
 .evaluation_instructor {
     font-size: 40px;
 }
+
+/* about page */
+#about_intro{
+    font-family: Georgia, serif;
+    text-align: center;
+    font-size: 20px;
+    margin: auto; 
+    width: 70%;
+    margin-top: 30px;
+}
+.no-bullets{
+    font-family: Georgia, serif;
+    list-style-type: none;
+    padding-top: 7px;
+    margin-left: 5%;
+    /* margin-top: 30px; */
+}
+.teams_logo{
+    display: block;
+    margin:auto;
+    width: 30%;
+}
+.list-member{
+    /* font-size: larger; */
+    font-size: 20px;
+    /* font-weight: 600; */
+    padding-bottom: 10px;
+}
+.about_logo{
+    margin-top:20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
