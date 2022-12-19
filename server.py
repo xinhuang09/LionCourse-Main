@@ -158,5 +158,17 @@ def about_page():
         return redirect(url_for('login'))
     return render_template('about.html', data=session.get('resp_obj'))
 
+@app.route('/sendEmail/<email>', methods=['GET'])
+def send_email(email):
+    global my_email
+    my_email = email
+    print("here" + my_email)
+    return my_email
+
+@app.route('/getEmail', methods=['GET'])
+def get_email():
+    print("here 1" + my_email)
+    return my_email
+
 if __name__ == '__main__':
-    app.run(debug = True, ssl_context=('cert.pem', 'key.pem'), port=5000)
+    app.run(debug = True, ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', port=5000)
