@@ -76,7 +76,9 @@ body {
     width: 100%;
     background-color: rgb(141, 139, 139, 0.5);
     border-radius: 10px;
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* padding: 10px; */
     /* margin: auto; */
 }
 
@@ -310,7 +312,7 @@ label.star:before {
     font-family: Georgia, serif;
     list-style-type: none;
     padding-top: 7px;
-    margin-left: 5%;
+    /* margin-left: 10%; */
     /* margin-top: 30px; */
 }
 .teams_logo{
@@ -319,6 +321,7 @@ label.star:before {
     width: 30%;
 }
 .list-member{
+    text-align: center;
     /* font-size: larger; */
     font-size: 20px;
     /* font-weight: 600; */
@@ -330,3 +333,4 @@ label.star:before {
     margin-left: auto;
     margin-right: auto;
     width: 30%;
+}

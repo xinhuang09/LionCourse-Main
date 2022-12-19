@@ -29,7 +29,7 @@ function display_all_message(message) {
     message_block.addClass("row")
 
     var message_content = $("<div></div>");
-    message_content.addClass("col-md-8");
+    message_content.addClass("col-md-7 pl-5");
     message_content.html(message.Content);
 
     //div for time
@@ -39,7 +39,7 @@ function display_all_message(message) {
 
     //div for email
     var message_email = $("<div></div>");
-    message_email.addClass("col-md-2");
+    message_email.addClass("col-md-3");
     message_email.html(message.Email);
 
     message_block.append(message_content)
