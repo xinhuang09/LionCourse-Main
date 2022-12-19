@@ -135,8 +135,13 @@ def rating():
 # submitted search keywords
 @app.route('/evaluation_page/<search_key>')
 def evaluation_page(search_key):
+    # result = requests.get(f'{slave2_url}/rating/{search_key}')
+    # return render_template('evaluation_page.html', data = result.json())
     result = requests.get(f'{slave2_url}/rating/{search_key}')
-    return render_template('evaluation_page.html', data = result.json())
+    query = search_key.split('&')
+    course_number = query[0]
+    message = requests.get(f'{slave3_url}/message/{course_number}')
+    return render_template('evaluation_page.html', data = result.json(), message=message.json())
 
 @app.route('/rating_page/<search_key>')
 def rating_page(search_key):
