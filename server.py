@@ -35,7 +35,7 @@ google = oauth.remote_app('google',
                           consumer_secret=GOOGLE_CLIENT_SECRET)
 
 # Read the value from login function
-MY_EMAIL = 'xh2510@columbia.edu'
+# MY_EMAIL = ''
 # Routes and functions
 
 # Homepage
@@ -55,6 +55,11 @@ def login():
 @google.authorized_handler
 def authorized(resp):
     access_token = resp['access_token']
+    # print(requests.get('https://www.googleapis.com/auth/userinfo.email').status_code)
+    result = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={access_token}').json()
+    # global MY_EMAIL
+    MY_EMAIL = result['email']
+    session['email'] = MY_EMAIL
     session['access_token'] = access_token, ''
     session['resp_obj'] = resp
     return redirect(url_for('welcome_page'))
@@ -119,7 +124,11 @@ def rating():
     query = request.get_json()
     search_key, evaluation = query['search_key'], query['evaluation']
     evaluation = '&'.join(str(e) for e in evaluation)
-    result = requests.post(f'{slave2_url}/rating/{search_key}/{evaluation}')
+    print('Here')
+    # access_token = session.get('access_token')
+    # email = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={access_token}').json()
+    MY_EMAIL = session.get('email')
+    result = requests.post(f'{slave2_url}/rating/{search_key}/{MY_EMAIL}/{evaluation}')
     print(result.text)
     return redirect('../evaluation_page/' + search_key)
 
@@ -133,7 +142,6 @@ def evaluation_page(search_key):
 def rating_page(search_key):
     result = requests.get(f'{slave2_url}/rating/{search_key}')
     return render_template('rating_page.html', data = result.json())
-
 
 @app.route('/message')
 def message():
@@ -157,18 +165,6 @@ def about_page():
     if access_token is None:
         return redirect(url_for('login'))
     return render_template('about.html', data=session.get('resp_obj'))
-
-@app.route('/sendEmail/<email>', methods=['GET'])
-def send_email(email):
-    global my_email
-    my_email = email
-    print("here" + my_email)
-    return my_email
-
-@app.route('/getEmail', methods=['GET'])
-def get_email():
-    print("here 1" + my_email)
-    return my_email
 
 if __name__ == '__main__':
     app.run(debug = True, ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', port=5000)
