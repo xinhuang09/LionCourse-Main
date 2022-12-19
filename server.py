@@ -159,4 +159,4 @@ def about_page():
     return render_template('about.html', data=session.get('resp_obj'))
 
 if __name__ == '__main__':
-    app.run(debug = True, ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', port=5000)
+    app.run(debug = True, ssl_context=('cert.pem', 'key.pem'), port=5000)
